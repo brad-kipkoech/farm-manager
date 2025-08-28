@@ -10,26 +10,39 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          submodules: true
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '18' # or 20/22 depending on your app
+      - name: Debug – Git & File Info
+        run: |
+          echo "=== Git Status ==="
+          git status
+          echo "=== Last Commit ==="
+          git log -1
+          echo "=== Root Directory Listing ==="
+          ls -la
+          echo "=== Frontend Listing ==="
+          ls -la frontend
 
-    - name: Install dependencies
-      run: npm install
-      working-directory: ./frontend
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
 
-    - name: Build React app
-      run: npm run build
-      working-directory: ./frontend
+      - name: Install dependencies
+        run: npm ci
+        working-directory: ./frontend
 
-    - name: Deploy to Azure Web App
-      uses: azure/webapps-deploy@v2
-      with:
-        app-name: 'farm-manager'
-        slot-name: 'production'
-        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-        package: ./frontend/build
+      - name: Build React app
+        run: npm run build
+        working-directory: ./frontend
+
+      - name: Deploy to Azure Web App
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: 'farm-manager'
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+          package: './frontend/build'
