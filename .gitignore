@@ -1,0 +1,52 @@
+# Node / React
+/frontend/node_modules
+/frontend/build
+/frontend/.pnp
+/frontend/.pnp.js
+/frontend/coverage
+/frontend/.DS_Store
+/frontend/.env*
+/frontend/npm-debug.log*
+/frontend/yarn-debug.log*
+/frontend/yarn-error.log*
+/frontend/pnpm-debug.log*
+/frontend/.vscode/
+/frontend/.idea/
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg
+*.egg-info/
+*.log
+*.pot
+*.mo
+*.db
+*.sqlite3
+instance/
+env/
+venv/
+ENV/
+.mypy_cache/
+.pytest_cache/
+.coverage
+coverage.xml
+*.prof
+*.ipynb_checkpoints
+.env
+
+# Docker
+*.pid
+*.seed
+*.log
+*.out
+*.gz
+docker-compose.override.yml
+
+# OS Specific
+.DS_Store
+Thumbs.db
+node_modules/
+.env
